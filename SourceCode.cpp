@@ -121,7 +121,7 @@ void Data::new_ac(){
 	printf("\nEnter initial amount to be deposited: ");
 	long nb;
 	cin >> nb;
-	n_en.ac = maxavailable;
+	n_en.ac = maxavailable++;
 	n_en.bal = nb;
 	cout << "\nYour New Account Number is: " << n_en.ac << '\n';
 	cout << "\tPLEASE, REMEMBER IT FOR FUTURE USE!\n";
