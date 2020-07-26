@@ -1,5 +1,5 @@
 /*
-_._._._._neloho_._._._._
+_._._._._harshvcode_._._._._
 hvsreal.223@gmail.com
 01:03 AM 18-07-2020
 BANK MANAGEMENT SYSTEM IN C++
@@ -18,6 +18,7 @@ class Data{
 		int ac;
 		string fname,sname;
 		long  bal;
+		void infoApp();
 		void welc();
 		void view();
 		void new_ac();
@@ -97,7 +98,12 @@ void Data::view(){
 	for(Data e:lis){
 		if(e.ac == acno && e.passwd == secure()){
 			cout<<"\n\n{\nAccount No.: "<<e.ac<<'\n';
-			cout<<"Name: "<<e.fname<<' '<<e.sname<<'\n';
+			cout<<"Name: ";
+			int len=e.fname.size();
+			for(int i=0; i<len; i++)
+				if(e.fname[i] == '-') cout << ' '; else cout <<e.fname[i];
+			cout << ' ';
+			cout << e.sname<<'\n';
 			cout<<"Balance: Rs. "<<e.bal<<"\n}\n\n";
 			f=true;
 			break;
@@ -110,7 +116,7 @@ void Data::new_ac(){
 	system("cls");
 	Data n_en;
 	string fn,sn;
-	printf("Enter Your First Name: ");
+	printf("Enter Your First Name(Use \"-\" instead of space): ");
 	cin >> fn;
 	printf("Enter Your Last Name: ");
 	cin >> sn;
@@ -181,8 +187,8 @@ void Data::withdr(){
 }
 void Data::saver(){
 	system("cls");
-	remove("data.txt");
-	ofstream os("data.txt");
+	remove("data.dat");
+	ofstream os("data.dat");
 	int n=lis.size();
 	for(int i=0;i<n;i++){
 		os<<lis[i].ac<<' '<<lis[i].fname<<'_'<<lis[i].sname<<' '<<lis[i].passwd<<' '<<lis[i].bal<<'\n';
@@ -191,7 +197,7 @@ void Data::saver(){
 	cout << "Data was successfully saved!\n\n";
 }
 void Data::loader(){
-	ifstream is("data.txt");
+	ifstream is("data.dat");
 	int acno;
 	string nam;
 	string passw;
@@ -218,6 +224,15 @@ void Data::welc(){
 	cout<<"\n\t\t\tWELCOME TO CITY BANK\n";
 	cout<<"\t\t     WE ARE HAPPY TO SERVE YOU!\n\n";
 }
+void Data::infoApp(){
+	system("cls");
+	cout << "******************************\n";
+	cout << "\nCreated By: Harshvardhan Singh\n";
+	cout << "Mail: hvsreal.223@gmail.com\n\tOR\n";
+	cout << "      harshvardhan.singh_cs18@gla.ac.in\n";
+	cout << "Github Link: https://github.com/harshvcode\n";
+	cout << "******************************\n\n\n\n";
+}
 int main(){
 	Data obj;
 	obj.loader();
@@ -229,7 +244,8 @@ int main(){
 		printf("\t\t\tPress W to withdraw amount\n");
 		printf("\t\t\t\tPress C to change Password\n");
 		printf("\t\t\t\t\tPress R to delete your account\n");
-		printf("\t\t\t\t\t\tPress E to exit: ");
+		printf("\t\t\t\t\t\tPress E to exit\n");
+		printf("\t\t\t\t\t\t\tPress I to see About Info of this application: ");
 		char res;
 		cin >> res;
 		res = toupper(res);
@@ -249,6 +265,7 @@ int main(){
 			cout << "\n\tSee you soon\n\n";
 			break;
 		}
+		else if(res == 'I') obj.infoApp();
 		else{
 			system("cls");
 			cout << "\tWrong value pressed\n\tTry Again!\n";
